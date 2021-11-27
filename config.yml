@@ -1,0 +1,51 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
+  browser-tools: circleci/browser-tools@1.1.3
+
+docker-defaults: &docker-defaults
+  docker:
+    - image: circleci/python:3.9-browsers
+      auth:
+        username: $DOCKERHUB_USERNAME
+        password: $DOCKERHUB_PASSWORD
+      environment:
+        PIPENV_VENV_IN_PROJECT: true
+
+commands:
+  setup-environment:
+    steps:
+      - checkout
+      - run: if [ -d "test-reports" ]; then rm -Rf test-reports; fi
+      - run: mkdir test-reports
+      - run:
+          command: sudo pip install --upgrade pip
+          name: Upgrade pip
+      - python/load-cache
+      - python/install-deps
+      - python/save-cache
+
+  store-test-reports:
+    steps:
+      - store_artifacts:
+          path: test-reports/
+          destination: tr1
+      - store_test_results:
+          path: test-reports/
+
+jobs:
+  test-api:
+    <<: *docker-defaults
+    steps:
+        - setup-environment
+        - run:
+            command: ./manage.py test
+            name: Test Appointments API
+        - store-test-reports
+
+workflows:
+  testing:
+    jobs:
+      - test-api:
+          context: CONFIG
