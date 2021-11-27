@@ -1,7 +1,4 @@
-from django.shortcuts import render
 from rest_framework import viewsets
-from rest_framework.exceptions import APIException
-from rest_framework.views import APIView
 from .serializers import AppointmentSerializer
 from .models import Appointment
 from rest_framework import status as rs_status
@@ -10,8 +7,20 @@ from django.http import JsonResponse
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from datetime import datetime, timezone
-from .utils import create_random_appointment
 from .exceptions import AppointmentAPIBadRequestException
+from datetime import datetime, timezone
+
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from rest_framework import status as rs_status
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+
+from .exceptions import AppointmentAPIBadRequestException
+from .models import Appointment
+from .serializers import AppointmentSerializer
+
 
 # Create your views here.
 
@@ -65,7 +74,7 @@ class AppointmentViewSet(viewsets.ModelViewSet):
 				end_date_time,
 				'%Y-%m-%dT%H-%M-%S'
 			).replace(tzinfo=timezone.utc)
-		except (ValueError, TypeError):
+		except (ValueError, TypeError) as e:
 			# ValueError for if the dates are incorrectly formatted
 			# TypeError for if they have not been provided at all in the URL parameters
 			raise AppointmentAPIBadRequestException(
