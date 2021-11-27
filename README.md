@@ -31,7 +31,7 @@ The endpoints exposed are:
 
 I have also included an example config.yml file that would be used in conjunction with CircleCI/Docker to create a CI pipeline
 
-###Things that could be improved
+### Things that could be improved
 1. The entire package could be wrapped in a docker image, making deployment a lot easier. This would be useful for you as the interviewer but also in production alongside the CI automatic testing suite
 2. Sqlite is not an appropriate DB choice for a production application, in reality I would use Postgres however for the sake of making deployment easier, I went with Sqlite
 3. Better documentation explaining how to use the API (e.g. example requests, example repsonses, data-types of all possible responses...etc.) would be very useful
