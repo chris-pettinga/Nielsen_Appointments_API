@@ -2,9 +2,6 @@ from datetime import datetime, timezone
 
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from django.utils.decorators import method_decorator
-from django.views import View
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status as rs_status
 from rest_framework import viewsets
 from rest_framework.decorators import action
@@ -88,17 +85,14 @@ class AppointmentViewSet(viewsets.ModelViewSet):
 		serialized_data = AppointmentSerializer(relevant_appointments, many=True)
 		return Response(data=serialized_data.data, status=rs_status.HTTP_200_OK)
 
+	@action(methods=['post'], detail=False)
+	def create_random_appointments(self, request):
+		"""
+		Creates a specified number of random appointments in the database.
 
-@method_decorator(csrf_exempt, name='dispatch')
-class CreateRandomAppointments(View):
-	"""
-	Creates a specified number of random appointments in the database.
-
-	The chosen number of new appointments to be created is provided using the 'number_new_appointments' key in the
-	request body
-	"""
-
-	def post(self, request):
+		The chosen number of new appointments to be created is provided using the 'number_new_appointments' key in the
+		request body
+		"""
 		try:
 			number_new_appointments = int(request.POST.get('number_new_appointments'))
 			for i in range(number_new_appointments):
