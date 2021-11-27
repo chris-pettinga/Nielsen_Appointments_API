@@ -104,8 +104,11 @@ class CreateRandomAppointments(View):
 			for i in range(number_new_appointments):
 				create_random_appointment()
 			return JsonResponse(
-				data={'detail': f'{number_new_appointments} new appointments have been successfully created'})
-		except ValueError:
+				data={'detail': f'{number_new_appointments} new appointments have been successfully created'},
+				status=201)
+		except (ValueError, TypeError):
 			# If the number_new_appointments value cannot be converted into an int
 			pass
-		return JsonResponse(data={'detail': 'Invalid number_new_appointments value provided'})
+		return JsonResponse(
+			data={'detail': 'Invalid number_new_appointments value provided. Please make sure it is an integer'},
+			status=400)
