@@ -24,6 +24,6 @@ The endpoints exposed are:
 | `/api/applications/{id}/` | GET        | Returns a single Appointment object with primary key {id}. If it does not exist, a 404 is returned |
 | `/api/applications/{id}/` | DELETE        | Deletes the Appointment object with primary key {id}
 | `/api/appointments/{id}/update_status/` | PUT        | Updates the status of the specified appointment with the status defined in the request body under the key 'status'. Available choices are [1,2,3] 
-| `/api/appointments/get_appointments_between_dates/| GET        | Retrieves all the appointments between a specified date range, ordered by price (highest first). The start and end datetimes must be passed as query parameters: **start_date_time** and **end_date_time**. The datetime is in the format %YEAR-%MONTH-%DAYT%HOUR-%MINUTE-%SECOND. E.G. for the 13th December 2021 12PM, it would be 2021-12-13T12-00-00
+| `/api/appointments/get_appointments_between_dates/`| GET        | Retrieves all the appointments between a specified date range, ordered by price (highest first). The start and end datetimes must be passed as query parameters: **start_date_time** and **end_date_time**. The datetime is in the format %YEAR-%MONTH-%DAYT%HOUR-%MINUTE-%SECOND. E.G. for the 13th December 2021 12PM, it would be 2021-12-13T12-00-00
 
 
