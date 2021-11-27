@@ -18,12 +18,6 @@ The base API URL is '/api/applications/'
 
 The endpoints exposed are:
 
-1. `/api/applications/{id}/` - Returns a single Appointment object with the specified primary key. If it does not exist, a 404 is returned
-2. `/api/applications/` - Returns a list of all Appointment objects in the database
-3. ``
-
-
-
 | Endpoint      | Request Type |  Result |
 | ----------- | ----------- | ----------- |
 | `api/applications/`      | GET       | Returns a list of all Appointment objects in the database |
