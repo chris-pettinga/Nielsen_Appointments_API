@@ -29,3 +29,12 @@ The endpoints exposed are:
 | `/api/appointments/get_appointments_between_dates/`| GET        | Retrieves all the appointments between a specified date range, ordered by price (highest first). The start and end datetimes must be passed as query parameters: **start_date_time** and **end_date_time**. The datetime is in the format %YEAR-%MONTH-%DAYT%HOUR-%MINUTE-%SECOND. E.G. for the 13th December 2021 12PM, it would be 2021-12-13T12-00-00
 
 
+I have also included an example config.yml file that would be used in conjunction with CircleCI/Docker to create a CI pipeline
+
+###Things that could be improved
+1. The entire package could be wrapped in a docker image, making deployment a lot easier. This would be useful for you as the interviewer but also in production alongside the CI automatic testing suite
+2. Sqlite is not an appropriate DB choice for a production application, in reality I would use Postgres however for the sake of making deployment easier, I went with Sqlite
+3. Better documentation explaining how to use the API (e.g. example requests, example repsonses, data-types of all possible responses...etc.) would be very useful
+4. User authentication and rate limiting to ensure that only authenticated and responsible users could access the API. This would perhaps be done in the form of an personal API key given to clients. 
+5. Similar to above, appointments could be linked to the users in the database, further improving data-access controls by only allowing clients to see the Appointments they have a relationship with
+6. I'm not too happy about the 'status' field of the Appointment model, it seems strange that a new record is created with a null value and is then only given one when the appointment has happened. Data in one table should all pertain to the state of that object at a single point in time, perhaps a one-to-many child table would be better to deal with appointment results and follow-ups

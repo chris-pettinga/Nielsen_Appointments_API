@@ -88,7 +88,7 @@ class AppointmentViewSet(viewsets.ModelViewSet):
 	@action(methods=['post'], detail=False)
 	def create_random_appointments(self, request):
 		"""
-		Creates a specified number of random appointments in the database.
+		POST - Creates a specified number of random appointments in the database.
 
 		The chosen number of new appointments to be created is provided using the 'number_new_appointments' key in the
 		request body
