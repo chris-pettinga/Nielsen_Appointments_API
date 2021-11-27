@@ -8,8 +8,9 @@ To run the web server:
 
 1. Create a new Python virtual environment
 2. Install the required dependencies `pip install -r requirements.txt`
-3. Run the Django server `python manage.py runserver`
-4. The server should now be running on localhost at port 8000 - '127.0.0.1:800'
+3. Run migrations `python manage.py migrate`
+4. Run the Django server `python manage.py runserver`
+5. The server should now be running on localhost at port 8000 - '127.0.0.1:800'
 
 The base API URL is '/api/applications/'
 
