@@ -41,7 +41,7 @@ class TestAppointmentAPI(TestCase):
 		# Testing that a DELETE request will delete the appropriate Appointment object
 
 		self.assertEqual(Appointment.objects.count(), 10)
-		r = self.client.delete('/api/appointments/1/')  # todo - dynamically generate the URL
+		r = self.client.delete('/api/appointments/1/')  # todo - dynamically generate the URL to reduce hard-coupling
 		self.assertEqual(Appointment.objects.count(), 9)
 		with self.assertRaises(Appointment.DoesNotExist):
 			# Checking that the right object has been deleted
@@ -73,12 +73,12 @@ class TestAppointmentAPI(TestCase):
 	def test_create_random_appointments(self):
 		# Testing that the create_random_appointments endpoint works
 		self.assertEqual(Appointment.objects.count(), 10)
-		r = self.client.post('/api/create_random_appointments/', {'number_new_appointments': 5})
+		r = self.client.post('/api/appointments/create_random_appointments/', {'number_new_appointments': 5})
 		self.assertEqual(Appointment.objects.count(), 15)
 
 class TestAppointmentsBetweenDates(TestCase):
 	"""
-	Testing the get_appointments_between_dates endpoint
+	Testing the get_appointments_between_dates endpoint, this is in a separate class as it doesn't need the setup() defined above.
 	"""
 
 	def test_appointments_between_dates_empty(self):
