@@ -69,7 +69,7 @@ class AppointmentViewSet(viewsets.ModelViewSet):
 			# ValueError for if the dates are incorrectly formatted
 			# TypeError for if they have not been provided at all in the URL parameters
 			raise AppointmentAPIBadRequestException(
-				detail='Please provide the start and end date/time in the correct format during which you would like to retrieve scheduled appointments. This can be done using the query parameters \'start_date_time\' and \'end_date_time\' in the format YEAR-MONTH-DAYTHOUR-MINUTE-SECOND e.g. to find all scheduled appointments between 12PM on the 13th December 2021 and 5pm on the 15th December 2021,the URL would look like /api/appointments/get_appointments_between_dates?start_date_time=2021-12-13T12-00-00&end_date_time=2021-12-15T17-00-00'
+				detail='Please provide the start and end date/time in the correct format during which you would like to retrieve scheduled appointments. This can be done using the query parameters \'start_date_time\' and \'end_date_time\' in the format YEAR-MONTH-DAYTHOUR-MINUTE-SECOND e.g. to find all scheduled appointments between 12PM on the 13th December 2021 and 5pm on the 15th December 2021,the URL would look like /api/appointments/get_appointments_between_dates/?start_date_time=2021-12-13T12-00-00&end_date_time=2021-12-15T17-00-00'
 			)
 
 		if start_date >= end_date:
