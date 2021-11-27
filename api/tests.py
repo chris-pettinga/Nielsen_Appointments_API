@@ -102,7 +102,7 @@ class TestAppointmentsBetweenDates(TestCase):
 			),
 			price=500
 		)
-		appointment_1 = Appointment.objects.create(
+		appointment_2 = Appointment.objects.create(
 			date_time=datetime.datetime(
 				year=2021,
 				month=8,
