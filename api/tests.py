@@ -1,10 +1,12 @@
-from django.test import TestCase
-from .utils import create_random_appointment
-from rest_framework.reverse import reverse
-from rest_framework.test import APIClient
-from .serializers import AppointmentSerializer
-from .models import Appointment
 import datetime
+
+from django.test import TestCase
+from rest_framework.test import APIClient
+
+from .models import Appointment
+from .serializers import AppointmentSerializer
+from .utils import create_random_appointment
+
 
 # Create your tests here.
 
@@ -39,12 +41,11 @@ class TestAppointmentAPI(TestCase):
 		# Testing that a DELETE request will delete the appropriate Appointment object
 
 		self.assertEqual(Appointment.objects.count(), 10)
-		r = self.client.delete('/api/appointments/1/') #todo - dynamically generate the URL
+		r = self.client.delete('/api/appointments/1/')  # todo - dynamically generate the URL
 		self.assertEqual(Appointment.objects.count(), 9)
 		with self.assertRaises(Appointment.DoesNotExist):
 			# Checking that the right object has been deleted
 			Appointment.objects.get(pk=1)
-
 
 	def test_update_status(self):
 		# Testing the update_status endpoint
@@ -81,7 +82,6 @@ class TestAppointmentsBetweenDates(TestCase):
 			'/api/appointments/get_appointments_between_dates/?start_date_time=2020-12-13T12-00-00&end_date_time=2020-12-15T17-00-00'
 		).json()
 		self.assertEqual(r, [])
-
 
 	def test_appointments_between_dates(self):
 		# Testing that the right Appointment objects are returned when an appropriate date range is provided
@@ -124,5 +124,3 @@ class TestAppointmentsBetweenDates(TestCase):
 			'/api/appointments/get_appointments_between_dates/?start_date_time=2021-07-19T12-00-00&end_date_time=2021-07-23T17-00-00'
 		).json()
 		self.assertEqual(len(r), 0)
-
-

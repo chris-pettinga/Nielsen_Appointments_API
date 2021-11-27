@@ -4,15 +4,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
+	dependencies = [
+		('api', '0002_alter_appointment_status'),
+	]
 
-    dependencies = [
-        ('api', '0002_alter_appointment_status'),
-    ]
-
-    operations = [
-        migrations.AlterField(
-            model_name='appointment',
-            name='status',
-            field=models.PositiveSmallIntegerField(choices=[(1, 'Completed without issue'), (2, 'Completed with issues'), (3, 'Client did not show up')], null=True, verbose_name='Status of the appointment'),
-        ),
-    ]
+	operations = [
+		migrations.AlterField(
+			model_name='appointment',
+			name='status',
+			field=models.PositiveSmallIntegerField(
+				choices=[(1, 'Completed without issue'), (2, 'Completed with issues'), (3, 'Client did not show up')],
+				null=True, verbose_name='Status of the appointment'),
+		),
+	]

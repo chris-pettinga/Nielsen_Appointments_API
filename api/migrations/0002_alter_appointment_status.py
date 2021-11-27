@@ -4,15 +4,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
+	dependencies = [
+		('api', '0001_initial'),
+	]
 
-    dependencies = [
-        ('api', '0001_initial'),
-    ]
-
-    operations = [
-        migrations.AlterField(
-            model_name='appointment',
-            name='status',
-            field=models.CharField(choices=[('a', 'Completed without issue'), ('b', 'Completed with issues'), ('c', 'Client did not show up')], max_length=2, null=True, verbose_name='Status of the appointment'),
-        ),
-    ]
+	operations = [
+		migrations.AlterField(
+			model_name='appointment',
+			name='status',
+			field=models.CharField(choices=[('a', 'Completed without issue'), ('b', 'Completed with issues'),
+											('c', 'Client did not show up')], max_length=2, null=True,
+								   verbose_name='Status of the appointment'),
+		),
+	]

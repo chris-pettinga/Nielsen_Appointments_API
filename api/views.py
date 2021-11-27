@@ -1,13 +1,3 @@
-from rest_framework import viewsets
-from .serializers import AppointmentSerializer
-from .models import Appointment
-from rest_framework import status as rs_status
-from django.shortcuts import get_object_or_404
-from django.http import JsonResponse
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from datetime import datetime, timezone
-from .exceptions import AppointmentAPIBadRequestException
 from datetime import datetime, timezone
 
 from django.http import JsonResponse

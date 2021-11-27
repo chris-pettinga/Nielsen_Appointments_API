@@ -1,6 +1,8 @@
-from .models import Appointment
 import datetime
 import random
+
+from .models import Appointment
+
 
 def create_random_appointment():
 	"""
