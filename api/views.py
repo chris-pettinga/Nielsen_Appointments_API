@@ -2,6 +2,9 @@ from datetime import datetime, timezone
 
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
+from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status as rs_status
 from rest_framework import viewsets
 from rest_framework.decorators import action
@@ -10,6 +13,7 @@ from rest_framework.response import Response
 from .exceptions import AppointmentAPIBadRequestException
 from .models import Appointment
 from .serializers import AppointmentSerializer
+from .utils import create_random_appointment
 
 
 # Create your views here.
@@ -83,3 +87,25 @@ class AppointmentViewSet(viewsets.ModelViewSet):
 
 		serialized_data = AppointmentSerializer(relevant_appointments, many=True)
 		return Response(data=serialized_data.data, status=rs_status.HTTP_200_OK)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class CreateRandomAppointments(View):
+	"""
+	Creates a specified number of random appointments in the database.
+
+	The chosen number of new appointments to be created is provided using the 'number_new_appointments' key in the
+	request body
+	"""
+
+	def post(self, request):
+		try:
+			number_new_appointments = int(request.POST.get('number_new_appointments'))
+			for i in range(number_new_appointments):
+				create_random_appointment()
+			return JsonResponse(
+				data={'detail': f'{number_new_appointments} new appointments have been successfully created'})
+		except ValueError:
+			# If the number_new_appointments value cannot be converted into an int
+			pass
+		return JsonResponse(data={'detail': 'Invalid number_new_appointments value provided'})

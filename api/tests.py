@@ -70,6 +70,11 @@ class TestAppointmentAPI(TestCase):
 		serialized_db_object = AppointmentSerializer(Appointment.objects.get(pk=1)).data
 		self.assertEqual(r, serialized_db_object)
 
+	def test_create_random_appointments(self):
+		# Testing that the create_random_appointments endpoint works
+		self.assertEqual(Appointment.objects.count(), 10)
+		r = self.client.post('/api/create_random_appointments/', {'number_new_appointments': 5})
+		self.assertEqual(Appointment.objects.count(), 15)
 
 class TestAppointmentsBetweenDates(TestCase):
 	"""

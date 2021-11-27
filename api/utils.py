@@ -7,7 +7,6 @@ from .models import Appointment
 def create_random_appointment():
 	"""
 	Create a new Appointment object with semi-random (appropriate) values.
-	:return:
 	"""
 
 	status_choices = [each[0] for each in Appointment.STATUS_CHOICES]

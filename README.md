@@ -16,6 +16,8 @@ The base API URL is '/api/applications/'
 
 **All requests must have a trailing slash**
 
+A function for generating random appointments can be found in the `api/utils.py` file. By making a POST request to `/api/create_random_appointments/` with key `number_new_appointments` in the request body, the specified number of random appointments will be created in the database. 
+
 The endpoints exposed are:
 
 | Endpoint      | Request Type |  Result |
